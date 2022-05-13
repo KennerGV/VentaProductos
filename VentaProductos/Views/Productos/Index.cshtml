@@ -1,0 +1,36 @@
+﻿@model List<VentaProductos.Models.ViewModels.Class1>
+@{
+    ViewBag.Title = "Productos";
+}
+
+<h2>@ViewBag.Title</h2>
+<div class="row" style="text-align:right;padding:5px;">
+    <a href="~/Productos/Nuevo" class="btn btn-primary">Nuevo</a>
+</div>
+<div class="row">
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <th>Codigo</th>
+                <th>Descripcion</th>
+                <th>Precio</th>
+                <th>Saldo Inventario</th>
+                <th>Fecha Ingreso</th>
+                <th>Usuario Ingreso</th>
+            </tr>
+                @foreach(var oElemento in Model)
+                {
+                    <tr>
+                        <td>@oElemento.CodigoProducto</td>
+                        <td>@oElemento.Descripcion</td>
+                        <td>@oElemento.Precio</td>
+                        <td>@oElemento.SaldoInventario</td>
+                        <td>@oElemento.FechaIngreso</td>
+                        <td>@oElemento.UsuarioIngreso</td>
+                    </tr>
+
+                }
+        </table>
+    </div>
+</div>
+

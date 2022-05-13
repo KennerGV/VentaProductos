@@ -1,0 +1,149 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="PruebaTec2Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="IN04">
+          <Key>
+            <PropertyRef Name="CodigoProducto" />
+          </Key>
+          <Property Name="CodigoProducto" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Descripcion" Type="varchar" MaxLength="50" />
+          <Property Name="Precio" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="SaldoInventario" Type="decimal" Precision="18" Scale="2" />
+          <Property Name="FechaIngreso" Type="datetime" />
+          <Property Name="UsuarioIngreso" Type="varchar" MaxLength="50" />
+          <Property Name="IDFamilia" Type="int" />
+        </EntityType>
+        <EntityType Name="IN05">
+          <Key>
+            <PropertyRef Name="IDFamilia" />
+          </Key>
+          <Property Name="IDFamilia" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NombreFamilia" Type="varchar" MaxLength="50" />
+          <Property Name="UsuarioIngreso" Type="varchar" MaxLength="50" />
+          <Property Name="Estado" Type="int" />
+        </EntityType>
+        <Association Name="fk_grupo">
+          <End Role="IN05" Type="Self.IN05" Multiplicity="0..1" />
+          <End Role="IN04" Type="Self.IN04" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IN05">
+              <PropertyRef Name="IDFamilia" />
+            </Principal>
+            <Dependent Role="IN04">
+              <PropertyRef Name="IDFamilia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PruebaTec2ModelStoreContainer">
+          <EntitySet Name="IN04" EntityType="Self.IN04" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="IN05" EntityType="Self.IN05" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_grupo" Association="Self.fk_grupo">
+            <End Role="IN05" EntitySet="IN05" />
+            <End Role="IN04" EntitySet="IN04" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PruebaTec2Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="IN04">
+          <Key>
+            <PropertyRef Name="CodigoProducto" />
+          </Key>
+          <Property Name="CodigoProducto" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Descripcion" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Precio" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="SaldoInventario" Type="Decimal" Precision="18" Scale="2" />
+          <Property Name="FechaIngreso" Type="DateTime" Precision="3" />
+          <Property Name="UsuarioIngreso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="IDFamilia" Type="Int32" />
+          <NavigationProperty Name="IN05" Relationship="Self.fk_grupo" FromRole="IN04" ToRole="IN05" />
+        </EntityType>
+        <EntityType Name="IN05">
+          <Key>
+            <PropertyRef Name="IDFamilia" />
+          </Key>
+          <Property Name="IDFamilia" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NombreFamilia" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="UsuarioIngreso" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Estado" Type="Int32" />
+          <NavigationProperty Name="IN04" Relationship="Self.fk_grupo" FromRole="IN05" ToRole="IN04" />
+        </EntityType>
+        <Association Name="fk_grupo">
+          <End Role="IN05" Type="Self.IN05" Multiplicity="0..1" />
+          <End Role="IN04" Type="Self.IN04" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="IN05">
+              <PropertyRef Name="IDFamilia" />
+            </Principal>
+            <Dependent Role="IN04">
+              <PropertyRef Name="IDFamilia" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PruebaTEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="IN04" EntityType="Self.IN04" />
+          <EntitySet Name="IN05" EntityType="Self.IN05" />
+          <AssociationSet Name="fk_grupo" Association="Self.fk_grupo">
+            <End Role="IN05" EntitySet="IN05" />
+            <End Role="IN04" EntitySet="IN04" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PruebaTec2ModelStoreContainer" CdmEntityContainer="PruebaTEntities">
+          <EntitySetMapping Name="IN04">
+            <EntityTypeMapping TypeName="PruebaTec2Model.IN04">
+              <MappingFragment StoreEntitySet="IN04">
+                <ScalarProperty Name="CodigoProducto" ColumnName="CodigoProducto" />
+                <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+                <ScalarProperty Name="Precio" ColumnName="Precio" />
+                <ScalarProperty Name="SaldoInventario" ColumnName="SaldoInventario" />
+                <ScalarProperty Name="FechaIngreso" ColumnName="FechaIngreso" />
+                <ScalarProperty Name="UsuarioIngreso" ColumnName="UsuarioIngreso" />
+                <ScalarProperty Name="IDFamilia" ColumnName="IDFamilia" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="IN05">
+            <EntityTypeMapping TypeName="PruebaTec2Model.IN05">
+              <MappingFragment StoreEntitySet="IN05">
+                <ScalarProperty Name="IDFamilia" ColumnName="IDFamilia" />
+                <ScalarProperty Name="NombreFamilia" ColumnName="NombreFamilia" />
+                <ScalarProperty Name="UsuarioIngreso" ColumnName="UsuarioIngreso" />
+                <ScalarProperty Name="Estado" ColumnName="Estado" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

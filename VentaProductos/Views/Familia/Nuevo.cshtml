@@ -1,0 +1,45 @@
+﻿@model VentaProductos.Models.ViewModels.FamiliaViewModel
+@{
+    ViewBag.Title = "Nuevo Familia";
+}
+
+<h2>@ViewBag.Title</h2>
+
+<div class="row" style="text-align:right;padding:5px">
+    <a href="~/Familia" class="btn btn-primary">Ver Familia</a>
+    <a href="~/Productos" class="btn btn-primary">Ver Productos</a>
+</div>
+
+
+@using (Html.BeginForm("Nuevo", "Familia", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                @Html.LabelFor(d => d.IDFamilia)
+                @Html.TextBoxFor(d => d.IDFamilia, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.IDFamilia, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.NombreFamilia)
+                @Html.TextBoxFor(d => d.NombreFamilia, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.NombreFamilia, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.UsuarioIngreso)
+                @Html.TextBoxFor(d => d.UsuarioIngreso, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.UsuarioIngreso, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Estado)
+                @Html.TextBoxFor(d => d.Estado, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Estado, null, new { @class = "red" })
+            </div>
+            <br />
+            <div style="text-align:right;">
+                <input value="Guardar" class="btn btn-primary" type="submit" />
+            </div>
+        </div>
+
+    </div>
+}

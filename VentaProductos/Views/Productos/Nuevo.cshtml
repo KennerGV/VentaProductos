@@ -1,0 +1,53 @@
+﻿@model VentaProductos.Models.ViewModels.ProductosViewModel
+@{
+    ViewBag.Title = "Nuevo Producto";
+}
+
+<h2>Nuevo</h2>
+
+<div class="row" style="text-align:right;padding:5px;">
+    <a href="~/Productos" class="btn btn-primary">Ver Productos</a>
+    <a href="~/Familia" class="btn btn-primary">Ver Familia</a>
+</div>
+@using (Html.BeginForm("Nuevo", "Productos", FormMethod.Post))
+{
+    <div class="row">
+        <div class="col-md-12">
+            <div>
+                @Html.LabelFor(d => d.CodigoProducto)
+                @Html.TextBoxFor(d => d.CodigoProducto, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.CodigoProducto, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Descripcion)
+                @Html.TextBoxFor(d => d.Descripcion, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Descripcion, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.Precio)
+                @Html.TextBoxFor(d => d.Precio, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.Precio, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.SaldoInventario)
+                @Html.TextBoxFor(d => d.SaldoInventario, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.SaldoInventario, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.FechaIngreso)
+                @Html.EditorFor(d => d.FechaIngreso, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.FechaIngreso, null, new { @class = "red" })
+            </div>
+            <div>
+                @Html.LabelFor(d => d.UsuarioIngreso)
+                @Html.TextBoxFor(d => d.UsuarioIngreso, "", new { @class = "form-control" })
+                @Html.ValidationMessageFor(d => d.UsuarioIngreso, null, new { @class = "red" })
+            </div>
+            <br />
+            <div style="text-align:right;">
+                <input value="Guardar" class="btn btn-primary" type="submit" />
+            </div>
+        </div>
+
+    </div>
+}
